@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शाखा अधिकृत प्रथम पत्र - भूगोल (Geography) | लोकसेवा तयारी</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Mukta (Nepali-friendly) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom overrides -->
+    <style>
+        * {
+            font-family: 'Mukta', 'Segoe UI', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            scroll-behavior: smooth;
+        }
+        .nepali-text {
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+        .continent-card {
+            border-left-width: 6px;
+            transition: all 0.2s ease;
+        }
+        .continent-card:hover {
+            transform: scale(1.02);
+        }
+        .detail-section {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        .detail-section.active {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .quiz-option {
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            border-color: #3b82f6 !important;
+            background-color: #eff6ff !important;
+        }
+        .selected-option {
+            border-color: #10b981 !important;
+            background-color: #ecfdf5 !important;
+        }
+        .correct-answer {
+            background-color: #d1fae5 !important;
+            border-left-color: #10b981 !important;
+        }
+        .wrong-answer {
+            background-color: #fee2e2 !important;
+            border-left-color: #ef4444 !important;
+        }
+        .progress-bar-custom {
+            transition: width 0.5s ease;
+        }
+        .highlight-bg {
+            background: linear-gradient(120deg, #fef3c7 0%, #fde68a 100%);
+        }
+        @media print {
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none;
+            }
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .quiz-container, .quiz-controls {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-slate-800 via-slate-700 to-red-700 text-white shadow-xl relative overflow-hidden">
+        <div class="absolute text-9xl opacity-10 right-5 top-5">🌍</div>
+        <div class="max-w-7xl mx-auto px-4 py-8 md:py-12 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
+                        <i class="fas fa-globe-asia text-yellow-300 mr-3"></i>शाखा अधिकृत प्रथम पत्र
+                    </h1>
+                    <p class="text-lg md:text-xl opacity-95 mt-2 font-medium">भूगोल (Geography) - विश्व तथा नेपाल</p>
+                    <div class="inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-semibold mt-4">
+                        <i class="fas fa-graduation-cap mr-2"></i> लोकसेवा आयोग तयारी - पूर्ण अध्ययन सामग्री
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0 flex gap-2">
+                    <button onclick="window.print()" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-lg transition flex items-center gap-2 no-print">
+                        <i class="fas fa-print"></i> प्रिन्ट गर्नुहोस्
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap gap-3 mb-8 border-b border-gray-200 pb-3 no-print">
+            <button onclick="switchSection('world')" id="tab-world" class="px-5 py-2.5 rounded-t-xl font-semibold transition-all bg-slate-800 text-white shadow-md">
+                <i class="fas fa-globe-americas mr-2"></i> विश्वको भूगोल
+            </button>
+            <button onclick="switchSection('nepal')" id="tab-nepal" class="px-5 py-2.5 rounded-t-xl font-semibold transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                <i class="fas fa-map-marked-alt mr-2"></i> नेपालको भूगोल
+            </button>
+            <button onclick="switchSection('economic')" id="tab-economic" class="px-5 py-2.5 rounded-t-xl font-semibold transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                <i class="fas fa-chart-line mr-2"></i> आर्थिक/सामाजिक
+            </button>
+            <button onclick="switchSection('quiz')" id="tab-quiz" class="px-5 py-2.5 rounded-t-xl font-semibold transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
+                <i class="fas fa-question-circle mr-2"></i> अभ्यास क्विज
+            </button>
+        </div>
+
+        <!-- 1. विश्वको भूगोल SECTION -->
+        <div id="world-section" class="detail-section active">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-8 mb-8">
+                <div class="flex items-center gap-3 border-b-4 border-red-500 pb-3 mb-6">
+                    <i class="fas fa-earth-asia text-3xl text-red-600"></i>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800">विश्वको भूगोल (World Geography)</h2>
+                </div>
+                <p class="text-gray-700 text-lg mb-6">विश्वको भूगोलमा मुख्यतया महादेश, महासागर, र भौगोलिक विशेषताहरूबाट लोकसेवा परीक्षामा प्रश्न सोधिन्छ। निम्न तथ्यहरू अत्यन्त महत्वपूर्ण छन्।</p>
+
+                <!-- महादेशहरू -->
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2 mt-6 mb-4"><i class="fas fa-layer-group text-blue-600"></i> महादेशहरू (Continents)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Asia -->
+                    <div class="continent-card bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-5 border-l-8 border-red-600 shadow-sm">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-mountain text-2xl text-red-600"></i><span class="font-black text-xl">एशिया</span></div>
+                        <p class="text-sm text-gray-600"><span class="font-bold">क्षेत्रफल:</span> २९.९% भू-भाग (सबैभन्दा ठूलो)</p>
+                        <p class="text-sm text-gray-600"><span class="font-bold">विशेषता:</span> 'विषमताको महादेश'</p>
+                        <p class="text-sm text-gray-600"><span class="font-bold">प्रमुख:</span> सगरमाथा, हिमालय</p>
+                    </div>
+                    <!-- Africa -->
+                    <div class="continent-card bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-5 border-l-8 border-amber-600">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-chess-queen text-2xl text-amber-600"></i><span class="font-black text-xl">अफ्रिका</span></div>
+                        <p class="text-sm text-gray-600"><span class="font-bold">उपनाम:</span> 'अँध्यारो महादेश' (Dark Continent)</p>
+                        <p class="text-sm text-gray-600"><span class="font-bold">विशेषता:</span> नाइल (लामो नदी), सहारा (ठूलो मरुभूमि)</p>
+                    </div>
+                    <!-- North America -->
+                    <div class="continent-card bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-5 border-l-8 border-blue-600">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-tree text-2xl text-blue-600"></i><span class="font-black text-xl">उत्तर अमेरिका</span></div>
+                        <p class="text-sm text-gray-600"><span class="font-bold">उपनाम:</span> 'नयाँ संसार'</p>
+                        <p class="text-sm text-gray-600"><span class="font-bold">प्रमुख:</span> मिसिसिपी, रकी पर्वत</p>
+                    </div>
+                    <!-- South America -->
+                    <div class="continent-card bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-5 border-l-8 border-emerald-600">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-feather-alt text-2xl text-emerald-600"></i><span class="font-black text-xl">दक्षिण अमेरिका</span></div>
+                        <p class="text-sm text-gray-600"><span class="font-bold">उपनाम:</span> 'चराहरूको महादेश'</p>
+                        <p class="text-sm text-gray-600"><span class="font-bold">प्रमुख:</span> एन्डिज पर्वत, अमेजन नदी</p>
+                    </div>
+                    <!-- Antarctica -->
+                    <div class="continent-card bg-gradient-to-br from-indigo-50 to-slate-100 rounded-xl p-5 border-l-8 border-indigo-600">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-snowflake text-2xl text-indigo-600"></i><span class="font-black text-xl">अन्टार्कटिका</span></div>
+                        <p class="text-sm text-gray-600"><span class="font-bold">उपनाम:</span> 'हिउँको महादेश'</p>
+                        <p class="text-sm text-gray-600">मानव बस्ती नभएको एक मात्र महादेश।</p>
+                    </div>
+                    <!-- Europe -->
+                    <div class="continent-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border-l-8 border-purple-600">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-landmark text-2xl text-purple-600"></i><span class="font-black text-xl">युरोप</span></div>
+                        <p class="text-sm text-gray-600"><span class="font-bold">विशेषता:</span> प्रायद्वीपको पनि प्रायद्वीप</p>
+                        <p class="text-sm text-gray-600">यहाँ मरुभूमि छैन।</p>
+                    </div>
+                    <!-- Australia -->
+                    <div class="continent-card bg-gradient-to-br from-rose-50 to-fuchsia-50 rounded-xl p-5 border-l-8 border-rose-600">
+                        <div class="flex items-center gap-3 mb-2"><i class="fas fa-kiwi-bird text-2xl text-rose-600"></i><span class="font-black text-xl">अस्ट्रेलिया</span></div>
+                        <p class="text-sm text-gray-600">सबैभन्दा सानो महादेश।</p>
+                        <p class="text-sm text-gray-600">एकै महादेश एकै देश भएको महादेश।</p>
+                    </div>
+                </div>
+
+                <!-- महासागरहरू -->
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2 mt-8 mb-4"><i class="fas fa-water text-cyan-600"></i> महासागरहरू (Oceans)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-cyan-50 p-4 rounded-xl border-l-4 border-cyan-600"><span class="font-bold text-cyan-800">प्रशान्त</span> – सबैभन्दा ठूलो, मारियाना ट्रेन्च (११,७७६ मि)</div>
+                    <div class="bg-sky-50 p-4 rounded-xl border-l-4 border-sky-600"><span class="font-bold text-sky-800">आन्ध्र (Atlantic)</span> – 'S' आकार, व्यापारिक रूपले व्यस्त</div>
+                    <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-600"><span class="font-bold text-blue-800">हिन्द</span> – 'रत्नहरूको महासागर' / तातो महासागर</div>
+                    <div class="bg-gray-100 p-4 rounded-xl border-l-4 border-gray-600"><span class="font-bold text-gray-800">कुमेरु/सुमेरु</span> – ध्रुवीय क्षेत्रको महासागर</div>
+                </div>
+
+                <!-- थप जानकारी : अक्षांश/देशान्तर, पर्वतमाला -->
+                <div class="mt-8 bg-indigo-50 rounded-xl p-6">
+                    <h3 class="font-bold text-indigo-800 text-lg mb-3"><i class="fas fa-compass"></i> अक्षांश र देशान्तर (Latitude & Longitude)</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm"><span class="font-bold text-indigo-700">अक्षांश:</span> भूमध्यरेखा (0°) बाट उत्तर/दक्षिण दुरी → तापक्रम निर्धारण (१८१ रेखा)</div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm"><span class="font-bold text-indigo-700">देशान्तर:</span> प्रधान मध्यान्ह (0°) बाट पूर्व/पश्चिम → समय निर्धारण (३६० रेखा)</div>
+                    </div>
+                    <p class="mt-3 text-sm"><span class="font-bold">अन्तर्राष्ट्रिय तिथि रेखा (IDL):</span> १८०° देशान्तर, जहाँबाट मिति परिवर्तन हुन्छ।</p>
+                    <div class="mt-4 flex flex-wrap gap-3 text-sm">
+                        <span class="bg-yellow-100 px-3 py-1 rounded-full"><span class="font-bold">एन्डिज:</span> सबैभन्दा लामो पर्वतमाला (द. अमेरिका)</span>
+                        <span class="bg-yellow-100 px-3 py-1 rounded-full"><span class="font-bold">हिमालय:</span> सबैभन्दा अग्लो (एशिया)</span>
+                        <span class="bg-yellow-100 px-3 py-1 rounded-full"><span class="font-bold">सहारा:</span> ठूलो तातो मरुभूमि (अफ्रिका)</span>
+                        <span class="bg-yellow-100 px-3 py-1 rounded-full"><span class="font-bold">गोबी:</span> एशियाको ठूलो मरुभूमि (चीन-मंगोलिया)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. नेपालको भौतिक भूगोल SECTION -->
+        <div id="nepal-section" class="detail-section">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-8 mb-8">
+                <div class="flex items-center gap-3 border-b-4 border-green-600 pb-3 mb-6">
+                    <i class="fas fa-map-marked-alt text-3xl text-green-700"></i>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800">नेपालको भौतिक भूगोल</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="bg-gradient-to-br from-green-50 to-teal-50 p-5 rounded-xl mb-4">
+                            <p><i class="fas fa-location-dot text-green-700 mr-2"></i><span class="font-bold">स्थिति:</span> २६°२२' – ३०°२७' उत्तरी अक्षांश, ८०°४' – ८८°१२' पूर्वी देशान्तर</p>
+                            <p class="mt-2"><i class="fas fa-arrows-alt text-green-700 mr-2"></i><span class="font-bold">क्षेत्रफल:</span> १,४७,५१६ वर्ग किमि (नक्सासहित), १,४७,१८१ वर्ग किमि (पूर्व)</p>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">धरातलीय स्वरूप</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2"><span class="bg-blue-100 text-blue-800 font-bold px-2 rounded">हिमाली (१५%)</span> <span>३००० मि+ , ८००० मि भन्दा अग्ला ८ हिमाल</span></li>
+                            <li class="flex items-start gap-2"><span class="bg-green-100 text-green-800 font-bold px-2 rounded">पहाडी (६८%)</span> <span>६००–३००० मि, महाभारत/चुरे श्रेणी</span></li>
+                            <li class="flex items-start gap-2"><span class="bg-yellow-100 text-yellow-800 font-bold px-2 rounded">तराई (१७%)</span> <span>५९ मि (केचना कलान) – ६०० मि, 'नेपालको अन्न भण्डार'</span></li>
+                        </ul>
+                        <div class="mt-5 p-4 bg-blue-50 rounded-lg"><span class="font-bold">प्रशासनिक:</span> ७ प्रदेश, ७७ जिल्ला, ७५३ स्थानीय तह (ठूलो जिल्ला=डोल्पा, सानो=भक्तपुर)</div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-3"><i class="fas fa-mountain"></i> ८,००० मिटरभन्दा अग्ला हिमालहरू "सकलोम चोधिमअ"</h3>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div>1. सगरमाथा (8848.86)</div><div>5. चोयु (8201)</div>
+                            <div>2. कन्चनजंघा (8586)</div><div>6. धौलागिरी (8167)</div>
+                            <div>3. लोत्से (8516)</div><div>7. मनास्लु (8163)</div>
+                            <div>4. मकालु (8463)</div><div>8. अन्नपूर्ण (8091)</div>
+                        </div>
+                        <div class="mt-6"><span class="font-bold">⚡ नदी वर्गीकरण:</span>
+                            <ul class="list-disc pl-5 mt-1 space-y-1">
+                                <li>पहिलो स्तर (हिमाल): कोशी, गण्डकी, कर्णाली – जलविद्युत</li>
+                                <li>दोस्रो स्तर (महाभारत): मेची, बागमती, राप्ती – सिंचाइ</li>
+                                <li>तेस्रो स्तर (चुरे): खहरे खोला – वर्षाकालीन</li>
+                            </ul>
+                        </div>
+                        <div class="mt-5 p-3 bg-amber-50 rounded-lg"><i class="fas fa-clock"></i> <span class="font-bold">प्रमाणिक समय:</span> गौरीशंकर हिमाल (८६°१५' पूर्व) आधार, GMT+५:४५ (२०४२ साल वैशाख १ देखि)</div>
+                    </div>
+                </div>
+                <div class="mt-6 grid md:grid-cols-3 gap-4">
+                    <div class="bg-red-50 p-3 rounded"><span class="font-bold">ठूला तालहरू:</span> रारा(मुगु), फोक्सुण्डो(डोल्पा–निर्जीव), तिलिचो(मनाङ)</div>
+                    <div class="bg-purple-50 p-3 rounded"><span class="font-bold">भन्ज्याङ:</span> टिङ्कर(दार्चुला), नाम्जा(मुगु), ओलाङचुङगोला(ताप्लेजुङ)</div>
+                    <div class="bg-emerald-50 p-3 rounded"><span class="font-bold">हावापानी:</span> उष्ण मनसुनी → न्यानो/ठण्डा समशीतोष्ण → लेकाली → टुन्ड्रा</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. आर्थिक र सामाजिक भूगोल SECTION -->
+        <div id="economic-section" class="detail-section">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-8">
+                <div class="flex items-center gap-3 border-b-4 border-amber-600 pb-3 mb-6">
+                    <i class="fas fa-chart-line text-3xl text-amber-700"></i>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800">नेपालको आर्थिक, सामाजिक भूगोल तथा पूर्वाधार</h2>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-xl"><i class="fas fa-tint"></i> नदी तथा जलविद्युत</h3>
+                        <p>६,०००+ नदीनाला, सैद्धान्तिक जलविद्युत क्षमता: <span class="font-bold text-blue-700">८३,००० मेगावाट</span> (प्राविधिक/आर्थिक: ४३,००० MW)</p>
+                        <div class="mt-4 space-y-2">
+                            <p><i class="fas fa-seedling text-green-600"></i> <span class="font-bold">कृषि:</span> १७.९७% खेतीयोग्य जमिन</p>
+                            <p><i class="fas fa-hotel text-orange-600"></i> <span class="font-bold">पर्यटन:</span> चितवन, सगरमाथा राष्ट्रिय निकुञ्ज, लुम्बिनी, पशुपतिनाथ (UNESCO)</p>
+                            <p><i class="fas fa-hard-hat"></i> <span class="font-bold">खानी:</span> फलाम(ठोसे), तामा(खानीगाउँ), चुनढुङ्गा(चोभार, धनकुटा)</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl"><i class="fas fa-church"></i> हावापानी क्षेत्रहरू</h3>
+                        <ul class="grid grid-cols-1 gap-2">
+                            <li>🔆 उष्ण मनसुनी (१२०० मि सम्म) – तराई/भावर</li>
+                            <li>🌿 न्यानो समशीतोष्ण (१२००-२१००) – पहाड</li>
+                            <li>🍂 ठण्डा समशीतोष्ण (२१००-३३००) – उच्च पहाड</li>
+                            <li>❄️ लेकाली (३३००-५०००) – हिमाली फेदी</li>
+                            <li>🏔️ टुन्ड्रा (५००० मि माथि) – हिमाल</li>
+                        </ul>
+                        <div class="mt-4 bg-amber-50 p-4 rounded-xl"><i class="fas fa-chart-simple"></i> <span class="font-bold">आर्थिक तथ्याङ्क:</span> जलविद्युत, कृषि तथा पर्यटन नै मुख्य आधार।</div>
+                    </div>
+                </div>
+                <div class="mt-6 p-5 bg-slate-100 rounded-xl">
+                    <h3 class="font-bold">परीक्षाका लागि द्रुत टिप्स:</h3>
+                    <div class="flex flex-wrap gap-3 mt-2">
+                        <span class="bg-red-100 px-3 py-1 rounded-full">कोशी (पूर्व)</span>
+                        <span class="bg-red-100 px-3 py-1 rounded-full">गण्डकी (मध्य)</span>
+                        <span class="bg-red-100 px-3 py-1 rounded-full">कर्णाली (पश्चिम)</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-full">रारा ताल (ठूलो)</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-full">फोक्सुण्डो (गहिरो)</span>
+                    </div>
+                    <p class="mt-3 text-sm"><span class="font-bold">सिमाना:</span> उत्तर–चीन, अन्य तीन दिशा–भारत। नेपाललाई नक्सासहितको क्षेत्र १,४७,५१६ वर्ग किमि प्रचलित।</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. क्विज अभ्यास SECTION (Interactive MCQs) -->
+        <div id="quiz-section" class="detail-section">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-8">
+                <div class="flex items-center gap-3 border-b-4 border-indigo-600 pb-3 mb-6">
+                    <i class="fas fa-brain text-3xl text-indigo-700"></i>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800">📝 अभ्यास क्विज (बहुविकल्पीय)</h2>
+                </div>
+                <div id="quiz-area" class="space-y-6">
+                    <!-- JS will populate quiz questions here -->
+                </div>
+                <div class="flex flex-wrap gap-4 justify-center mt-8 no-print">
+                    <button id="submitQuizBtn" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition"><i class="fas fa-check-circle"></i> उत्तर जाँच गर्नुहोस्</button>
+                    <button id="resetQuizBtn" class="bg-gray-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-700 transition"><i class="fas fa-redo-alt"></i> पुन: प्रयास गर्नुहोस्</button>
+                </div>
+                <div id="result-area" class="mt-8 hidden"></div>
+            </div>
+        </div>
+
+        <!-- Extra Quick notes footer -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 mt-8 text-sm text-gray-600 flex flex-wrap justify-between no-print">
+            <div><i class="fas fa-map"></i> सुझाव: नक्सासँग तुलना गर्दै पढ्ने हो भने याद शक्ति बढ्छ।</div>
+            <div><i class="fas fa-chart-line"></i> सकलोम चोधिमअ – हिमाल सम्झने सूत्र</div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-white text-center py-6 mt-10 no-print">
+        <p>© २०८१ शाखा अधिकृत प्रथम पत्र - भूगोल अध्ययन सामग्री | लोकसेवा आयोग तयारीको लागि</p>
+        <p class="text-sm opacity-75 mt-1">नेपाल सरकार, लोकसेवा आयोग, प्रशासकीय सेवा</p>
+    </footer>
+
+    <script>
+        // MCQ Question Bank (Based on Above Notes)
+        const questionBank = [
+            { q: "विश्वको सबैभन्दा ठूलो महादेश कुन हो?", options: ["अफ्रिका", "एशिया", "उत्तर अमेरिका", "अस्ट्रेलिया"], correct: "एशिया", explanation: "एशिया २९.९% भूभाग ओगटेको सबैभन्दा ठूलो महादेश हो।" },
+            { q: "'अँध्यारो महादेश' (Dark Continent) को रूपमा चिनिने महादेश कुन हो?", options: ["युरोप", "दक्षिण अमेरिका", "अफ्रिका", "एन्टार्कटिका"], correct: "अफ्रिका", explanation: "अफ्रिका अँध्यारो महादेश उपनामले चिनिन्छ।" },
+            { q: "विश्वको सबैभन्दा लामो पर्वतमाला कुन हो?", options: ["हिमालय", "रकी", "एन्डिज", "आल्प्स"], correct: "एन्डिज", explanation: "एन्डिज दक्षिण अमेरिकामा अवस्थित विश्वको सबैभन्दा लामो पर्वतमाला हो।" },
+            { q: "नेपालको प्रमाणिक समय निर्धारण कुन हिमाललाई आधार मानी गरिन्छ?", options: ["सगरमाथा", "गौरीशंकर", "अन्नपूर्ण", "धौलागिरी"], correct: "गौरीशंकर", explanation: "गौरीशंकर (८६°१५' पूर्व) को देशान्तरलाई आधार मानिन्छ।" },
+            { q: "नेपालको सबैभन्दा ठूलो जिल्ला कुन हो?", options: ["मुस्ताङ", "डोल्पा", "हुम्ला", "ताप्लेजुङ"], correct: "डोल्पा", explanation: "क्षेत्रफलका दृष्टिले डोल्पा नेपालको सबैभन्दा ठूलो जिल्ला हो।" },
+            { q: "नेपालको अन्न भण्डारको रूपमा कुन प्रदेशलाई चिनिन्छ?", options: ["हिमाली", "पहाडी", "तराई", "उपत्यका"], correct: "तराई", explanation: "तराई प्रदेश उर्वर भूमि भएकोले नेपालको अन्न भण्डार मानिन्छ।" },
+            { q: "संसारको सबैभन्दा गहिरो महासागर कुन हो?", options: ["हिन्द", "आन्ध्र", "प्रशान्त", "आर्कटिक"], correct: "प्रशान्त", explanation: "प्रशान्त महासागरको मारियाना ट्रेन्च पृथ्वीको सबैभन्दा गहिरो बिन्दु हो।" },
+            { q: "ग्रीनविच मानक समय (GMT) भन्दा नेपालको समय कति छिटो छ?", options: ["५ घण्टा", "५ घण्टा ३० मिनेट", "५ घण्टा ४५ मिनेट", "६ घण्टा"], correct: "५ घण्टा ४५ मिनेट", explanation: "नेपाल GMT + ५:४५ मा छ।" },
+            { q: "विश्वको सबैभन्दा लामो नदी कुन हो?", options: ["अमेजन", "नाइल", "याङ्त्जे", "मिसिसिपी"], correct: "नाइल", explanation: "नाइल (अफ्रिका) विश्वको सबैभन्दा लामो नदी हो।" },
+            { q: "नेपालमा सबैभन्दा बढी जलविद्युत क्षमता भएको नदी प्रणाली कुन हो?", options: ["कोशी", "गण्डकी", "कर्णाली", "बागमती"], correct: "कर्णाली", explanation: "कर्णाली नेपालको सबैभन्दा लामो नदी भएकोले जलविद्युत संभावना पनि उच्च छ।" }
+        ];
+
+        let currentQuestions = [...questionBank];
+        let userAnswers = new Array(currentQuestions.length).fill(null);
+        let quizAttempted = false;
+
+        // Render Quiz
+        function renderQuiz() {
+            const quizDiv = document.getElementById('quiz-area');
+            if (!quizDiv) return;
+            quizDiv.innerHTML = '';
+            currentQuestions.forEach((q, idx) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = "bg-gray-50 rounded-xl p-5 shadow-sm border-l-8 border-indigo-300";
+                questionCard.innerHTML = `
+                    <p class="font-bold text-lg mb-3">${idx+1}. ${q.q}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${q.options.map(opt => `
+                            <label class="quiz-option flex items-center gap-3 p-3 border rounded-lg cursor-pointer bg-white transition border-gray-200" data-qidx="${idx}" data-val="${opt}">
+                                <input type="radio" name="q${idx}" value="${opt}" class="w-4 h-4 text-indigo-600" style="accent-color:#4f46e5;">
+                                <span class="text-gray-800">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="exp-${idx}" class="text-sm mt-2 hidden text-gray-600 italic"></div>
+                `;
+                quizDiv.appendChild(questionCard);
+            });
+
+            // attach radio change listeners
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const name = radio.name;
+                    const idx = parseInt(name.substring(1));
+                    const selectedVal = radio.value;
+                    userAnswers[idx] = selectedVal;
+                    // remove highlight from all options of this question
+                    document.querySelectorAll(`label[data-qidx="${idx}"]`).forEach(lbl => {
+                        lbl.classList.remove('bg-green-50', 'border-green-500');
+                    });
+                    if(radio.closest('.quiz-option')) radio.closest('.quiz-option').classList.add('bg-green-50','border-green-500');
+                });
+            });
+            // reset result display
+            document.getElementById('result-area').classList.add('hidden');
+            document.getElementById('result-area').innerHTML = '';
+            quizAttempted = false;
+        }
+
+        // Evaluate Quiz
+        function evaluateQuiz() {
+            let score = 0;
+            const explanations = [];
+            for (let i=0; i<currentQuestions.length; i++) {
+                const isCorrect = (userAnswers[i] === currentQuestions[i].correct);
+                if(isCorrect) score++;
+                const explanationHtml = `<span class="font-bold">${userAnswers[i] ? userAnswers[i] : 'जवाफ दिइएन'}</span> (सही: ${currentQuestions[i].correct})<br> ${currentQuestions[i].explanation}`;
+                explanations.push({ idx:i, correct: isCorrect, detail: explanationHtml });
+            }
+            const percentage = (score/currentQuestions.length)*100;
+            let message = "";
+            if(percentage>=80) message = "उत्कृष्ट ! तपाईं भूगोलमा निपुण हुनुहुन्छ 🌟";
+            else if(percentage>=60) message = "राम्रो प्रयास ! अझै अभ्यास जारी राख्नुहोस् 📘";
+            else message = "नियमित नोट्स अध्ययन गर्नुहोस् र पुन: प्रयास गर्नुहोस् 💪";
+
+            let resultHtml = `<div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl shadow-lg mt-5">
+                <div class="text-center"><span class="text-5xl font-bold">${score}/${currentQuestions.length}</span><p class="text-gray-600">सही उत्तर</p></div>
+                <div class="w-full bg-gray-200 rounded-full h-3 mt-2"><div class="bg-green-500 h-3 rounded-full progress-bar-custom" style="width: ${percentage}%"></div></div>
+                <p class="text-center text-lg font-semibold mt-4">${message} (${percentage.toFixed(0)}%)</p>
+                <div class="mt-5 space-y-3">
+                    ${explanations.map(exp => `<div class="p-3 rounded-lg ${exp.correct ? 'bg-green-100 border-l-4 border-green-600' : 'bg-red-100 border-l-4 border-red-500'}">
+                        <span class="font-bold">प्रश्न ${exp.idx+1}:</span> ${exp.detail}
+                    </div>`).join('')}
+                </div>
+            </div>`;
+            const resultDiv = document.getElementById('result-area');
+            resultDiv.innerHTML = resultHtml;
+            resultDiv.classList.remove('hidden');
+            quizAttempted = true;
+            window.scrollTo({ top: document.getElementById('quiz-section').offsetTop, behavior: 'smooth' });
+        }
+
+        // Reset quiz selections
+        function resetQuiz() {
+            userAnswers.fill(null);
+            renderQuiz();
+            document.getElementById('result-area').classList.add('hidden');
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('bg-green-50','border-green-500'));
+        }
+
+        // Tab switching logic
+        function switchSection(section) {
+            const world = document.getElementById('world-section');
+            const nepal = document.getElementById('nepal-section');
+            const economic = document.getElementById('economic-section');
+            const quizSec = document.getElementById('quiz-section');
+            const tabWorld = document.getElementById('tab-world');
+            const tabNepal = document.getElementById('tab-nepal');
+            const tabEco = document.getElementById('tab-economic');
+            const tabQuiz = document.getElementById('tab-quiz');
+            
+            const sections = [world, nepal, economic, quizSec];
+            const tabs = [tabWorld, tabNepal, tabEco, tabQuiz];
+            sections.forEach(sec => sec?.classList.remove('active'));
+            tabs.forEach(tab => {
+                if(tab) tab.classList.remove('bg-slate-800', 'text-white');
+                if(tab) tab.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            if(section === 'world') { world?.classList.add('active'); tabWorld?.classList.add('bg-slate-800','text-white'); tabWorld?.classList.remove('bg-gray-100'); }
+            if(section === 'nepal') { nepal?.classList.add('active'); tabNepal?.classList.add('bg-slate-800','text-white'); tabNepal?.classList.remove('bg-gray-100'); }
+            if(section === 'economic') { economic?.classList.add('active'); tabEco?.classList.add('bg-slate-800','text-white'); tabEco?.classList.remove('bg-gray-100'); }
+            if(section === 'quiz') { quizSec?.classList.add('active'); tabQuiz?.classList.add('bg-slate-800','text-white'); tabQuiz?.classList.remove('bg-gray-100'); renderQuiz(); }
+        }
+
+        // Event listeners after DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            const submitBtn = document.getElementById('submitQuizBtn');
+            const resetBtn = document.getElementById('resetQuizBtn');
+            if(submitBtn) submitBtn.addEventListener('click', evaluateQuiz);
+            if(resetBtn) resetBtn.addEventListener('click', resetQuiz);
+            window.switchSection = switchSection;
+        });
+    </script>
+</body>
+</html>
